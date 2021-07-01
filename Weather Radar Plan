@@ -1,0 +1,63 @@
+Requirements:
+    Draw data from an open source weather API 
+        Should be able to interchange our API key without our code being dependent on just one
+    Able to take a zipcode input and present a radar image that autorefreshes every few minutes
+    Stretch goal:
+        Presented image switches between radar and textual forecast
+
+General Goal:
+    Able to display an image that comes from an API that can periodically refresh
+        Can be used for stocks, sports scores, airline tickets, etc.
+
+
+Code in Python with maybe some Javascript
+
+
+Potential APIs:
+    OpenWeather:
+        https://openweathermap.org/api/weathermaps - radar
+        https://openweathermap.org/forecast5#zip  - information
+        # radar api : http://maps.openweathermap.org/maps/2.0/weather/PR0/4/5/5?appid=1f32df32063a31f7b1a4b4fd9adeefd7
+# weather api : http://api.openweathermap.org/data/2.5/weather?zip=78746,us&appid=1f32df32063a31f7b1a4b4fd9adeefd7
+
+
+Timeline:
+    Finding which API url to paste into code 
+        Fix API key validation from server - 2 hours
+        Sending a general request to the API to test functionality - 1 hour
+
+    Validating zipcode (perhaps through design requirements or database)
+        Digit requirement - 1 hour
+        Number of characters requirement - <1 hour
+
+    Parsing or converting data into temporary stored variables - 1 day -- only necessary if JSON isn't readable
+        Converting JSON tags into key-value dictionary pairs - 2 hours
+
+
+    Designing a page to present the radar or information - 2-3 days
+        Perhaps just presenting retrieved image - 3 hours   
+            open image locally and then use it as a source
+        If getting information, taking the information and putting it into a basic HTML formatted page to make sense - 2 hours
+
+
+    Having the API be retrieved periodically after being initialized for a zipcode - 3 days
+       Making a basic timer and testing it - 2 hours
+       Retrieving new image or data from API based on timer = needs to be dependent on availability of API data - 2 hours
+       Asserting that the data is being refreshed periodically and not stagnating by comparing specific values returned by API call - 1 hour
+
+    
+Goals:
+Neatify data without coupling to api
+Add radar to page - parameters?
+
+Time zone input
+Sunrise and sunset
+Kelvin to fahrenheit
+
+
+
+    
+https://tile.openweathermap.org/map/precipitation_new/1/3/3.png?appid=1f32df32063a31f7b1a4b4fd9adeefd7
+
+
+    
