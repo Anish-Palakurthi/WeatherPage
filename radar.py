@@ -109,7 +109,7 @@ def updatePage(zipcode):
         latitude=cleanData(dataDict, "coord", "lat"),
         longitude=cleanData(dataDict, "coord", "lon"),
         weather=cleanData(dataDict, "weather"),
-    )
+    ) 
     f.write(message)
     f.close()
 
