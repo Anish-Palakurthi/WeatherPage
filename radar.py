@@ -25,6 +25,8 @@ def cleanData(parsedData, topic):
         return datetime.utcfromtimestamp(parsedData["dt"]).strftime("%Y-%m-%d %H:%M:%S")
     elif topic == "name":
         return parsedData["name"]
+    elif topic == "weather":
+        return (parsedData["weather"])["main"]
     elif topic == "sunrise":
         return datetime.utcfromtimestamp(parsedData["sunrise"]).strftime(
             "%Y-%m-%d %H:%M:%S"
@@ -41,9 +43,6 @@ def cleanData(parsedData, topic, subtopic):
             return str((parsedData["coord"])["lon"])
         else:
             return str((parsedData["coord"])["lat"])
-
-    elif topic == "weather":
-        return (parsedData["weather"])["main"]
 
     elif topic == "main":
         if subtopic == "temp":
@@ -105,13 +104,11 @@ def updatePage(zipcode):
     f = open("radarpage.html", "w")
     message = """<html>
     <head><meta http-equiv="refresh" content="0"></head>
-    <body><p>{coordinates}</p><p>{weather}</body>
+    <body><p>Latitude: {latitude} <br> Longitude: {longitude}</p><p>Weater conditions: {weather}</p></body>
     </html>""".format(
-        coordinates="Latitude: "
-        + cleanData(dataDict, "coord", "lat")
-        + " Longitude: "
-        + cleanData(dataDict, "coord", "lon"), 
-        weather = 
+        latitude=cleanData(dataDict, "coord", "lat"),
+        longitude=cleanData(dataDict, "coord", "lon"),
+        weather=cleanData(dataDict, "weather"),
     )
     f.write(message)
     f.close()
