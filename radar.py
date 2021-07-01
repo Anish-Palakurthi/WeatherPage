@@ -28,11 +28,11 @@ def cleanData(parsedData, topic):
     elif topic == "weather":
         return str(((parsedData["weather"])[0])["main"])
     elif topic == "sunrise":
-        return datetime.utcfromtimestamp(parsedData["sunrise"]).strftime(
+        return datetime.utcfromtimestamp((parsedData["sys"])["sunrise"]).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
     elif topic == "sunset":
-        return datetime.utcfromtimestamp(parsedData["sunset"]).strftime(
+        return datetime.utcfromtimestamp((parsedData["sys"])["sunset"]).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
 
@@ -103,25 +103,23 @@ def updatePage(zipcode):
     dataDict = retrieveData(zipcode)
     f = open("radarpage.html", "w")
     message = """<html>
-    <head><meta http-equiv="refresh" content="0"></head>
-    <body><p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
+    <head><META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="-1"></head>
+    <body> <h1> {time} </h1> <p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
     </html>""".format(
         city=cleanData(dataDict, "name"),
         latitude=cleanDataSub(dataDict, "coord", "lat"),
         longitude=cleanDataSub(dataDict, "coord", "lon"),
         weather=cleanData(dataDict, "weather"),
-        temp = cleanDataSub(dataDict, "main", "temp"),
-        low = = cleanDataSub(dataDict, "main", "temp_min"),
-        high = = cleanDataSub(dataDict, "main", 'temp_max'),
-        feels_like = = cleanDataSub(dataDict, "main", 'feels_like'),
-        humidity = = cleanDataSub(dataDict, "main", 'humidity'),
-        windspeed = = cleanDataSub(dataDict, "wind", 'speed'),
-        time = cleanData(dataDict, 'dt'),
-        sunrise = cleanData(dataDict, 'sunrise'),
-        sunset = cleanData(dataDict, 'sunset')
-
-
-
+        temp=cleanDataSub(dataDict, "main", "temp"),
+        low=cleanDataSub(dataDict, "main", "temp_min"),
+        high=cleanDataSub(dataDict, "main", "temp_max"),
+        feels_like=cleanDataSub(dataDict, "main", "feels_like"),
+        humidity=cleanDataSub(dataDict, "main", "humidity"),
+        windspeed=cleanDataSub(dataDict, "wind", "speed"),
+        time=cleanData(dataDict, "dt"),
+        sunrise=cleanData(dataDict, "sunrise"),
+        sunset=cleanData(dataDict, "sunset"),
     )
     f.write(message)
     f.close()
