@@ -104,12 +104,24 @@ def updatePage(zipcode):
     f = open("radarpage.html", "w")
     message = """<html>
     <head><meta http-equiv="refresh" content="0"></head>
-    <body><p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weater conditions: {weather}</p> <p></body>
+    <body><p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
     </html>""".format(
         city=cleanData(dataDict, "name"),
         latitude=cleanDataSub(dataDict, "coord", "lat"),
         longitude=cleanDataSub(dataDict, "coord", "lon"),
         weather=cleanData(dataDict, "weather"),
+        temp = cleanDataSub(dataDict, "main", "temp"),
+        low = = cleanDataSub(dataDict, "main", "temp_min"),
+        high = = cleanDataSub(dataDict, "main", 'temp_max'),
+        feels_like = = cleanDataSub(dataDict, "main", 'feels_like'),
+        humidity = = cleanDataSub(dataDict, "main", 'humidity'),
+        windspeed = = cleanDataSub(dataDict, "wind", 'speed'),
+        time = cleanData(dataDict, 'dt'),
+        sunrise = cleanData(dataDict, 'sunrise'),
+        sunset = cleanData(dataDict, 'sunset')
+
+
+
     )
     f.write(message)
     f.close()
