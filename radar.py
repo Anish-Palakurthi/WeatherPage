@@ -103,8 +103,7 @@ def updatePage(zipcode):
     dataDict = retrieveData(zipcode)
     f = open("radarpage.html", "w")
     message = """<html>
-    <head><META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Expires" CONTENT="-1"></head>
+    <head><meta http-equiv="refresh" content="0"></head>
     <body> <h1> {time} </h1> <p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
     </html>""".format(
         city=cleanData(dataDict, "name"),
@@ -131,9 +130,10 @@ if zipcodeValidation(zcode) is False:
     print("Invalid zipcode")
     exit()
 
+dTime = int(input("Enter the time delay:"))
 
 refreshNum = input("How many sets of data would you like?")
 refreshNum = int(refreshNum) - 1
 updatePage(zcode)
 for num in range(refreshNum):
-    periodicTimer(15)
+    periodicTimer(dTime)
