@@ -104,7 +104,7 @@ def updatePage(zipcode):
     f = open("radarpage.html", "w")
     message = """<html>
     <head><meta http-equiv="refresh" content="0"></head>
-    <body> <h1> {time} </h1> <p> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
+    <body> <h1> {time} </h1> <p id="location"> City: {city}, Latitude: {latitude}, Longitude: {longitude}</p><p>Weather conditions: {weather}</p> <p>Temperature: {temp} <br> Low: {low}, High: {high}, Feels Like: {feels_like}, Humidity: {humidity} </p></body>
     </html>""".format(
         city=cleanData(dataDict, "name"),
         latitude=cleanDataSub(dataDict, "coord", "lat"),
